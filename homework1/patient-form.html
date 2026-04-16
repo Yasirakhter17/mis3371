@@ -1,1 +1,238 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CarePath Medical - Patient Registration</title>
+ 
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+ 
+    <!-- Dynamic Date Script -->
+    <script>
+        function displayDate() {
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("currentDate").innerHTML = today.toLocaleDateString("en-US", options);
+        }
+    </script>
+ 
+<!--
+Program name: patient-form.html
+Author: YOUR NAME (UH Roster Name)
+Date created: MM/DD/YYYY
+Date last edited: MM/DD/YYYY
+Version: 1.0
+Description: Patient Registration Form for CarePath Medical
+-->
+ 
+</head>
+ 
+<body onload="displayDate()">
+ 
+<!-- ================= HEADER SECTION ================= -->
+<div id="header">
+    <h1>CarePath Medical</h1>
+    <h3>Today is: <span id="currentDate"></span></h3>
+</div>
+ 
+<!-- ================= MAIN FORM SECTION ================= -->
+<div id="main">
+ 
+<h2>New Patient Registration Form</h2>
+ 
+<form action="thankyou.html">
+ 
+<table>
+ 
+<tr>
+    <td class="label">First Name:</td>
+    <td><input type="text" name="firstname" maxlength="30" required></td>
+ 
+    <td class="label">Middle Initial:</td>
+    <td><input type="text" name="mi" maxlength="1" size="2"></td>
+ 
+    <td class="label">Last Name:</td>
+    <td><input type="text" name="lastname" maxlength="30" required></td>
+</tr>
+ 
+<tr>
+    <td class="label">Date of Birth:</td>
+    <td><input type="date" name="dob" required></td>
+</tr>
+ 
+<tr>
+    <td class="label">Social Security:</td>
+    <td><input type="password" name="ssn" maxlength="11" placeholder="XXX-XX-XXXX" required></td>
+</tr>
+ 
+<tr>
+    <td class="label">Address Line 1:</td>
+    <td><input type="text" name="address1" maxlength="30" required></td>
+</tr>
+ 
+<tr>
+    <td class="label">Address Line 2:</td>
+    <td><input type="text" name="address2" maxlength="30"></td>
+</tr>
+ 
+<tr>
+    <td class="label">City:</td>
+    <td><input type="text" name="city" maxlength="30" required></td>
+ 
+    <td class="label">State:</td>
+    <td>
+        <select name="state" required>
+            <option value="">Select State</option>
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option>
+            <option value="DC">District of Columbia</option>
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+            <option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+            <option value="PR">Puerto Rico</option>
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+        </select>
+    </td>
+ 
+    <td class="label">Zip Code:</td>
+    <td><input type="text" name="zip" maxlength="10" required></td>
+</tr>
+ 
+<tr>
+    <td class="label">Email:</td>
+    <td><input type="email" name="email" required></td>
+</tr>
+ 
+<tr>
+    <td class="label">Phone Number:</td>
+    <td><input type="tel" name="phone" placeholder="(###) ###-####"></td>
+</tr>
+ 
+<tr>
+    <td class="label">User ID:</td>
+    <td><input type="text" name="userid" maxlength="20" required></td>
+</tr>
+ 
+<tr>
+    <td class="label">Password:</td>
+    <td><input type="password" name="password" required></td>
+</tr>
+ 
+<tr>
+    <td class="label">Re-enter Password:</td>
+    <td><input type="password" name="repassword" required></td>
+</tr>
+ 
+<tr>
+    <td class="label">Describe Current Symptoms:</td>
+    <td><textarea name="symptoms" rows="3" cols="50"></textarea></td>
+</tr>
+ 
+<tr>
+    <td class="label">Have you had:</td>
+    <td>
+        <input type="checkbox" name="history" value="chickenpox"> Chicken Pox<br>
+        <input type="checkbox" name="history" value="measles"> Measles<br>
+        <input type="checkbox" name="history" value="covid19"> Covid-19<br>
+        <input type="checkbox" name="history" value="smallpox"> Small Pox<br>
+        <input type="checkbox" name="history" value="tetanus"> Tetanus
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Gender:</td>
+    <td>
+        <input type="radio" name="gender" value="male"> Male
+        <input type="radio" name="gender" value="female"> Female
+        <input type="radio" name="gender" value="other"> Other
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Vaccinated?</td>
+    <td>
+        <input type="radio" name="vaccinated" value="yes"> Yes
+        <input type="radio" name="vaccinated" value="no"> No
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Do you have insurance?</td>
+    <td>
+        <input type="radio" name="insurance" value="yes"> Yes
+        <input type="radio" name="insurance" value="no"> No
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Health Rating (1-10):</td>
+    <td><input type="range" name="health" min="1" max="10" value="5"></td>
+</tr>
+ 
+<tr>
+    <td colspan="6">
+        <input type="reset" value="CLEAR AND START OVER">
+        &nbsp;&nbsp;
+        <input type="submit" value="Submit Registration">
+    </td>
+</tr>
+ 
+</table>
+</form>
+</div>
+ 
+<!-- ================= FOOTER SECTION ================= -->
+<div id="footer">
+    <button onclick="alert('Call us at 800-555-9911')">Contact Us</button>
+    <p>1200 Main Street | Houston, TX 77002</p>
+    <p>&copy; 2026 CarePath Medical</p>
+</div>
+ 
+<!-- END OF DOCUMENT: patient-form.html -->
+ 
+</body>
+</html>
