@@ -1,8 +1,8 @@
 /*
 Program name: homework2.js
-Author: YOUR NAME (UH Roster Name)
-Date created: MM/DD/YYYY
-Date last edited: MM/DD/YYYY
+Author: YASIR Akhter
+Date created: 03/27/2026
+Date last edited: 04/23/2026
 Version: 2.0
 Description: External JavaScript file for CarePath Medical homework2.html.
              Contains all validation functions and the review form function.
