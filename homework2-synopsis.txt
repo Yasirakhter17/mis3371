@@ -1,0 +1,62 @@
+MIS 3371 - Homework 2 Synopsis
+Author: YOUR NAME (UH Roster Name)
+Date: MM/DD/YYYY
+
+==============================================
+WHAT THIS WEBSITE / FORM IS SUPPOSED TO DO:
+==============================================
+
+This is the CarePath Medical patient registration form (homework 2).
+It builds on homework 1 by adding JavaScript validation, HTML pattern
+matching, and a Review button that displays all entered data before
+the user submits.
+
+The form collects patient demographic information including name,
+date of birth, social security number, contact information, address,
+medical history, and account login credentials.
+
+==============================================
+WHAT I AM HAPPY WITH THAT IS WORKING:
+==============================================
+
+1. The Review button correctly pulls all data from the form and
+   displays it in a formatted table below the form, showing
+   pass or ERROR status for each field.
+
+2. The password validation checks for uppercase, lowercase, number,
+   and special character requirements and shows an error message
+   next to the field.
+
+3. The two password fields are compared and display an error if
+   they do not match.
+
+4. The slider dynamically updates the number next to it as the
+   user moves it.
+
+5. The date of birth field automatically sets min and max limits
+   using JavaScript so future dates and dates over 120 years ago
+   cannot be selected.
+
+6. The user ID field converts the entry to lowercase on blur and
+   redisplays the corrected version.
+
+7. HTML pattern attributes are used on most fields to prevent
+   bad data from being submitted.
+
+==============================================
+WHAT I DID NOT YET GET WORKING:
+==============================================
+
+1. The address line 2 field does not yet check whether it was
+   entered before applying the 2-30 character validation since
+   it is an optional field.
+
+2. The form does not yet check whether the password contains
+   part of the user ID or the user's name.
+
+3. The zip code truncation on review works but does not update
+   the actual zip field permanently until review is clicked.
+
+==============================================
+END OF SYNOPSIS
+==============================================

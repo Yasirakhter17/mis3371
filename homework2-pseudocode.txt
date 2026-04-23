@@ -1,0 +1,207 @@
+MIS 3371 - Homework 2 Pseudocode
+Author: YOUR NAME (UH Roster Name)
+Date: MM/DD/YYYY
+
+==============================================
+MAIN
+==============================================
+
+    DO BEGINNING
+    DO MIDDLE
+    DO END
+
+END MAIN
+
+==============================================
+BEGINNING
+==============================================
+
+    DISPLAY homework2.html form to user
+    SET date limits on DOB field (min = 120 years ago, max = today)
+    SET slider display value to 5
+
+END BEGINNING
+
+==============================================
+MIDDLE
+==============================================
+
+    IF user moves the slider
+        CALL UPDATE-SLIDER
+    END IF
+
+    IF user leaves the User ID field
+        CALL CHECK-USERID
+    END IF
+
+    IF user leaves the Password field
+        CALL CHECK-PASSWORD
+    END IF
+
+    IF user leaves the Re-enter Password field
+        CALL CHECK-PASSWORD-MATCH
+    END IF
+
+    IF user clicks the Review button
+        CALL REVIEW-FORM
+    END IF
+
+    IF user clicks the Reset button
+        CLEAR the form
+        HIDE the review area
+    END IF
+
+    IF user clicks the Submit button
+        CALL VALIDATE-ALL
+        IF no errors
+            GO TO thankyou.html
+        ELSE
+            DISPLAY error alert
+            STAY on form
+        END IF
+    END IF
+
+END MIDDLE
+
+==============================================
+UPDATE-SLIDER
+==============================================
+
+    GET current value of slider
+    DISPLAY value next to the slider
+
+END UPDATE-SLIDER
+
+==============================================
+CHECK-USERID
+==============================================
+
+    GET userid field value
+
+    IF userid is empty
+        DISPLAY "User ID is required"
+        SET error condition
+    ELSE IF userid does not match pattern (start with letter, 5-30 chars, no spaces)
+        DISPLAY "User ID must start with a letter, 5-30 characters, no spaces"
+        SET error condition
+    ELSE
+        CONVERT userid to lowercase
+        REDISPLAY lowercase userid in the field
+        CLEAR error message
+    END IF
+
+END CHECK-USERID
+
+==============================================
+CHECK-PASSWORD
+==============================================
+
+    GET password field value
+
+    IF password is empty
+        DISPLAY "Password is required"
+        SET error condition
+    ELSE IF password is less than 8 characters OR more than 30 characters
+        DISPLAY "Password must be 8 to 30 characters"
+        SET error condition
+    ELSE IF password has no uppercase letter
+        DISPLAY "Password must have at least 1 uppercase letter"
+        SET error condition
+    ELSE IF password has no lowercase letter
+        DISPLAY "Password must have at least 1 lowercase letter"
+        SET error condition
+    ELSE IF password has no number
+        DISPLAY "Password must have at least 1 number"
+        SET error condition
+    ELSE IF password has no special character
+        DISPLAY "Password must have at least 1 special character"
+        SET error condition
+    ELSE IF password contains a double quote
+        DISPLAY "Password cannot contain double quotes"
+        SET error condition
+    ELSE
+        CLEAR error message
+    END IF
+
+END CHECK-PASSWORD
+
+==============================================
+CHECK-PASSWORD-MATCH
+==============================================
+
+    GET password value
+    GET re-enter password value
+
+    IF re-enter password is empty
+        DISPLAY "Please re-enter your password"
+        SET error condition
+    ELSE IF password does not equal re-enter password
+        DISPLAY "Passwords do not match"
+        SET error condition
+    ELSE
+        CLEAR error message
+    END IF
+
+END CHECK-PASSWORD-MATCH
+
+==============================================
+VALIDATE-ALL
+==============================================
+
+    SET valid = true
+
+    CALL CHECK-USERID
+        IF failed, SET valid = false
+
+    CALL CHECK-PASSWORD
+        IF failed, SET valid = false
+
+    CALL CHECK-PASSWORD-MATCH
+        IF failed, SET valid = false
+
+    IF valid = false
+        DISPLAY alert "Please fix the errors before submitting"
+        RETURN false (block form submission)
+    ELSE
+        RETURN true (allow form to submit)
+    END IF
+
+END VALIDATE-ALL
+
+==============================================
+REVIEW-FORM
+==============================================
+
+    SHOW the review area div
+
+    GET all field values from the form
+
+    FOR each field
+        DISPLAY the field value in the review table
+        IF field is empty or invalid
+            DISPLAY ERROR status in red
+        ELSE
+            DISPLAY pass status in green
+        END IF
+    END FOR
+
+    TRUNCATE zip code to 5 digits if longer
+    REDISPLAY truncated zip
+
+    DISPLAY password as asterisks (do not show real password)
+
+    SCROLL page down to review area
+
+END REVIEW-FORM
+
+==============================================
+END
+==============================================
+
+    (reserved for future use - logout, etc.)
+
+END END
+
+==============================================
+END OF PSEUDOCODE: homework2
+==============================================
