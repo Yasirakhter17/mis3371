@@ -1,6 +1,6 @@
 MIS 3371 - Homework 2 Synopsis
-Author: YOUR NAME (UH Roster Name)
-Date: MM/DD/YYYY
+Author: Yasir Akhter
+Date: 04/23/2026
 
 ==============================================
 WHAT THIS WEBSITE / FORM IS SUPPOSED TO DO:
@@ -47,14 +47,14 @@ WHAT I AM HAPPY WITH THAT IS WORKING:
 WHAT I DID NOT YET GET WORKING:
 ==============================================
 
-1. The address line 2 field does not yet check whether it was
+1. The address line 2 field doesnt yet check whether it was
    entered before applying the 2-30 character validation since
    it is an optional field.
 
-2. The form does not yet check whether the password contains
+2. The form doesnt yet check whether the password contains
    part of the user ID or the user's name.
 
-3. The zip code truncation on review works but does not update
+3. The zip code truncation on review works but doesnt update
    the actual zip field permanently until review is clicked.
 
 ==============================================
