@@ -1,6 +1,6 @@
 MIS 3371 - Homework 2 Pseudocode
-Author: YOUR NAME (UH Roster Name)
-Date: MM/DD/YYYY
+Author: Yasir Akhter
+Date: 04/23/2026
 
 ==============================================
 MAIN
