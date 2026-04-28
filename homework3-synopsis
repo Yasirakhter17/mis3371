@@ -1,11 +1,12 @@
 MIS 3371 - Homework 3 Synopsis
-Author: YOUR NAME (UH Roster Name)
-Date: MM/DD/YYYY
+Author: Yasir Akhter
+Date: 04/28/2026
 Theme: CarePath Medical - Patient Registration
  
 ==============================================
 URL:
-https://Yasirakhter17.github.io/mis3371/homework3/homework3.html
+https://github.com/Yasirakhter17/mis3371/blob/main/homework3.html
+
 ==============================================
  
 ==============================================
@@ -14,7 +15,7 @@ WHAT THIS FORM IS SUPPOSED TO DO:
  
 This is the CarePath Medical patient registration form for homework 3.
 It builds on homework 2 by moving all validation from HTML pattern
-attributes into JavaScript functions that run on-the-fly as the user
+attributes into JavaScript functions that run onthefly as the user
 types or leaves each field.
  
 The Submit button is hidden when the page loads and only appears
@@ -33,7 +34,7 @@ WHAT I AM HAPPY WITH THAT IS WORKING:
 2. Error messages appear and disappear on the fly as the user
    types in each field, without waiting for a submit click.
  
-3. The SSN field auto-formats itself as the user types, inserting
+3. The SSN field auto formats itself as the user types, inserting
    dashes after the 3rd and 5th digits automatically.
  
 4. The User ID is automatically converted to lowercase and the
@@ -59,7 +60,7 @@ WHAT I DID NOT YET GET WORKING:
 1. The error count tracker can sometimes get out of sync if
    the user clicks Validate multiple times. A full reset of
    the counter is done each time Validate is clicked to
-   work around this.
+   work around this. I did not know what else to do. 
  
 2. The form does not yet check whether the password contains
    part of the user's first or last name.
