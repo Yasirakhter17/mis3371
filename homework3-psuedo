@@ -1,0 +1,429 @@
+MIS 3371 - Homework 3 Pseudocode
+Author: Yasir Akhter
+Date: 04/28/2026
+ 
+==============================================
+MAIN
+==============================================
+ 
+    DO BEGINNING
+    DO MIDDLE
+    DO END
+ 
+END MAIN
+ 
+==============================================
+BEGINNING
+==============================================
+ 
+    DISPLAY homework3.html form
+    SET date limits on DOB field
+        min = 120 years ago from today
+        max = today (no future dates)
+    SET slider display value to 5
+    HIDE the Submit button
+ 
+END BEGINNING
+ 
+==============================================
+MIDDLE - ON THE FLY EVENTS
+==============================================
+ 
+    WHEN user types in First Name field
+        CALL CHECK-FIRST-NAME
+    END WHEN
+ 
+    WHEN user types in Last Name field
+        CALL CHECK-LAST-NAME
+    END WHEN
+ 
+    WHEN user types in Middle Initial field
+        CALL CHECK-MI
+    END WHEN
+ 
+    WHEN user leaves Date of Birth field
+        CALL CHECK-DOB
+    END WHEN
+ 
+    WHEN user types in SSN field
+        CALL FORMAT-SSN
+        CALL CHECK-SSN
+    END WHEN
+ 
+    WHEN user types in Email field
+        CALL CHECK-EMAIL
+    END WHEN
+ 
+    WHEN user leaves Phone field
+        CALL CHECK-PHONE
+    END WHEN
+ 
+    WHEN user types in Address 1 field
+        CALL CHECK-ADDRESS1
+    END WHEN
+ 
+    WHEN user leaves Address 2 field
+        CALL CHECK-ADDRESS2
+    END WHEN
+ 
+    WHEN user types in City field
+        CALL CHECK-CITY
+    END WHEN
+ 
+    WHEN user changes State dropdown
+        CALL CHECK-STATE
+    END WHEN
+ 
+    WHEN user types in Zip field
+        CALL CHECK-ZIP
+    END WHEN
+ 
+    WHEN user types in User ID field
+        CALL CHECK-USERID
+    END WHEN
+ 
+    WHEN user types in Password field
+        CALL CHECK-PASSWORD
+    END WHEN
+ 
+    WHEN user types in Re-enter Password field
+        CALL CHECK-PASSWORD-MATCH
+    END WHEN
+ 
+    WHEN user moves the slider
+        CALL UPDATE-SLIDER
+    END WHEN
+ 
+    WHEN user clicks Review button
+        CALL REVIEW-FORM
+    END WHEN
+ 
+    WHEN user clicks Validate button
+        CALL VALIDATE-ALL
+    END WHEN
+ 
+    WHEN user clicks Reset button
+        CLEAR all fields
+        HIDE submit button
+        HIDE review area
+        RESET error counter to 0
+    END WHEN
+ 
+END MIDDLE
+ 
+==============================================
+VALIDATE-ALL  (THE VALIDATE BUTTON LOGIC)
+This is the main function the professor asked for
+==============================================
+ 
+    RESET error counter to 0
+    HIDE Submit button
+    CLEAR all error messages on the page
+ 
+    CALL CHECK-FIRST-NAME
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-MI
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-LAST-NAME
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-DOB
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-SSN
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-EMAIL
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-PHONE
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-ADDRESS1
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-ADDRESS2
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-CITY
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-STATE
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-ZIP
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-USERID
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-PASSWORD
+        IF failed --> error counter goes up
+ 
+    CALL CHECK-PASSWORD-MATCH
+        IF failed --> error counter goes up
+ 
+    IF error counter = 0
+        SHOW Submit button
+        DISPLAY alert "All fields look good! You may now submit."
+    ELSE
+        KEEP Submit button hidden
+        DISPLAY alert "Please fix the errors on the form."
+    END IF
+ 
+END VALIDATE-ALL
+ 
+==============================================
+SET-ERROR (helper used by every check below)
+==============================================
+ 
+    GET the error span next to the field
+    IF the span was previously empty
+        ADD 1 to error counter
+    END IF
+    PUT the error message in the span (shows in red)
+    HIDE the Submit button
+ 
+END SET-ERROR
+ 
+==============================================
+CLEAR-ERROR (helper used by every check below)
+==============================================
+ 
+    GET the error span next to the field
+    IF the span had a message in it
+        SUBTRACT 1 from error counter
+    END IF
+    CLEAR the span (error message disappears)
+    IF error counter = 0
+        SHOW the Submit button
+    END IF
+ 
+END CLEAR-ERROR
+ 
+==============================================
+INDIVIDUAL FIELD CHECK FUNCTIONS
+==============================================
+ 
+CHECK-FIRST-NAME
+    IF field is empty
+        CALL SET-ERROR "First name is required"
+        RETURN fail
+    ELSE IF field has anything other than letters, apostrophes, dashes
+        CALL SET-ERROR "Letters, apostrophes and dashes only"
+        RETURN fail
+    ELSE
+        CALL CLEAR-ERROR
+        RETURN pass
+    END IF
+END CHECK-FIRST-NAME
+ 
+--------------------------------------------
+ 
+CHECK-MI
+    IF field is empty
+        CALL CLEAR-ERROR (optional field, blank is ok)
+        RETURN pass
+    ELSE IF field is not exactly one letter
+        CALL SET-ERROR "One letter only"
+        RETURN fail
+    ELSE
+        CALL CLEAR-ERROR
+        RETURN pass
+    END IF
+END CHECK-MI
+ 
+--------------------------------------------
+ 
+CHECK-LAST-NAME
+    (same logic as CHECK-FIRST-NAME)
+END CHECK-LAST-NAME
+ 
+--------------------------------------------
+ 
+CHECK-DOB
+    IF field is empty
+        CALL SET-ERROR "Date of birth is required"
+        RETURN fail
+    ELSE IF date is in the future
+        CALL SET-ERROR "Cannot be in the future"
+        RETURN fail
+    ELSE IF date is more than 120 years ago
+        CALL SET-ERROR "Cannot be more than 120 years ago"
+        RETURN fail
+    ELSE
+        CALL CLEAR-ERROR
+        RETURN pass
+    END IF
+END CHECK-DOB
+ 
+--------------------------------------------
+ 
+FORMAT-SSN
+    STRIP all non-digit characters from field
+    IF more than 5 digits entered
+        INSERT dash after 3rd digit
+        INSERT dash after 5th digit
+    ELSE IF more than 3 digits entered
+        INSERT dash after 3rd digit
+    END IF
+END FORMAT-SSN
+ 
+CHECK-SSN
+    IF field is empty
+        CALL CLEAR-ERROR (optional)
+        RETURN pass
+    ELSE IF digit count is not exactly 9
+        CALL SET-ERROR "Must be exactly 9 digits"
+        RETURN fail
+    ELSE
+        CALL CLEAR-ERROR
+        RETURN pass
+    END IF
+END CHECK-SSN
+ 
+--------------------------------------------
+ 
+CHECK-EMAIL
+    CONVERT field to lowercase
+    IF field is empty
+        CALL SET-ERROR "Email is required"
+        RETURN fail
+    ELSE IF field does not match name@domain.tld pattern
+        CALL SET-ERROR "Must be in format name@domain.com"
+        RETURN fail
+    ELSE
+        CALL CLEAR-ERROR
+        RETURN pass
+    END IF
+END CHECK-EMAIL
+ 
+--------------------------------------------
+ 
+CHECK-PHONE
+    IF field is empty
+        CALL CLEAR-ERROR (optional)
+        RETURN pass
+    ELSE IF field does not match 000-000-0000 pattern
+        CALL SET-ERROR "Format must be 000-000-0000"
+        RETURN fail
+    ELSE
+        CALL CLEAR-ERROR
+        RETURN pass
+    END IF
+END CHECK-PHONE
+ 
+--------------------------------------------
+ 
+CHECK-ADDRESS1
+    IF field is empty
+        CALL SET-ERROR "Address is required"
+        RETURN fail
+    ELSE IF length less than 2 or more than 30
+        CALL SET-ERROR "Must be 2 to 30 characters"
+        RETURN fail
+    ELSE
+        CALL CLEAR-ERROR
+        RETURN pass
+    END IF
+END CHECK-ADDRESS1
+ 
+--------------------------------------------
+ 
+CHECK-ADDRESS2
+    IF field is empty
+        CALL CLEAR-ERROR (optional)
+        RETURN pass
+    ELSE IF length less than 2 or more than 30
+        CALL SET-ERROR "If entered, must be 2 to 30 characters"
+        RETURN fail
+    ELSE
+        CALL CLEAR-ERROR
+        RETURN pass
+    END IF
+END CHECK-ADDRESS2
+ 
+--------------------------------------------
+ 
+CHECK-CITY / CHECK-STATE / CHECK-ZIP
+    (same required field logic as ADDRESS1)
+    ZIP must be exactly 5 digits
+END
+ 
+--------------------------------------------
+ 
+CHECK-USERID
+    IF field is empty
+        CALL SET-ERROR "User ID is required"
+        RETURN fail
+    ELSE IF length less than 5 or more than 20
+        CALL SET-ERROR "Must be 5 to 20 characters"
+        RETURN fail
+    ELSE IF first character is a number
+        CALL SET-ERROR "Cannot start with a number"
+        RETURN fail
+    ELSE IF contains spaces or special characters
+        CALL SET-ERROR "Letters, numbers, dash, underscore only"
+        RETURN fail
+    ELSE
+        CONVERT to lowercase
+        REDISPLAY lowercase version in field
+        CALL CLEAR-ERROR
+        RETURN pass
+    END IF
+END CHECK-USERID
+ 
+--------------------------------------------
+ 
+CHECK-PASSWORD
+    IF field is empty
+        CALL SET-ERROR "Password is required"
+        RETURN fail
+    ELSE IF length less than 8
+        CALL SET-ERROR "Must be at least 8 characters"
+        RETURN fail
+    ELSE IF length more than 30
+        CALL SET-ERROR "Cannot be more than 30 characters"
+        RETURN fail
+    ELSE IF no uppercase letter found
+        CALL SET-ERROR "Must have 1 uppercase letter"
+        RETURN fail
+    ELSE IF no lowercase letter found
+        CALL SET-ERROR "Must have 1 lowercase letter"
+        RETURN fail
+    ELSE IF no number found
+        CALL SET-ERROR "Must have 1 number"
+        RETURN fail
+    ELSE IF contains double quotes
+        CALL SET-ERROR "Cannot contain double quotes"
+        RETURN fail
+    ELSE IF password equals userid
+        CALL SET-ERROR "Cannot match your User ID"
+        RETURN fail
+    ELSE
+        CALL CLEAR-ERROR
+        CALL CHECK-PASSWORD-MATCH (re-check match)
+        RETURN pass
+    END IF
+END CHECK-PASSWORD
+ 
+--------------------------------------------
+ 
+CHECK-PASSWORD-MATCH
+    IF re-enter field is empty
+        CALL SET-ERROR "Please re-enter your password"
+        RETURN fail
+    ELSE IF password does not equal re-enter password
+        CALL SET-ERROR "Passwords do not match"
+        RETURN fail
+    ELSE
+        CALL CLEAR-ERROR
+        RETURN pass
+    END IF
+END CHECK-PASSWORD-MATCH
+ 
+==============================================
+END OF PSEUDOCODE: homework3
+==============================================
