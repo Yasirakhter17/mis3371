@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CarePath Medical - Patient Registration</title>
+ 
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+ 
+    <!-- External JavaScript -->
+    <script src="homework4.js"></script>
+ 
+<!--
+Program name: homework4.html
+Author Yasir Akhter
+Date created: 05/08/2026
+Date last edited: 05/12/2026
+Version: 4.0
+Description: Patient Registration Form for CarePath Medical.
+             Builds on homework3 by adding
+             - Fetch API to load states dropdown from external file
+             - iFrame for footer content
+             - Sticky header that stays on screen when scrolling
+             - Fixed footer position
+             - Cookies to remember returning user by first name
+             - Local Storage to save and reload non-sensitive form data
+-->
+ 
+</head>
+ 
+<!-- onload calls setup() which handles cookie check, date, and loading local storage -->
+<body onload="setup()">
+ 
+<!-- ================= HEADER SECTION (STICKY) ================= -->
+<!-- position:sticky in CSS keeps this on screen as user scrolls -->
+<div id="header">
+    <table width="100%">
+        <tr>
+            <td>
+                <h1>CarePath Medical</h1>
+            </td>
+            <td align="right">
+                <!-- Cookie welcome message goes here -->
+                <span id="welcomeMsg"></span><br>
+                Today is: <span id="currentDate"></span>
+            </td>
+        </tr>
+    </table>
+ 
+    <!-- Shown only if returning user cookie is found -->
+    <!-- "Not [name]? Click here" checkbox to clear cookie and start over -->
+    <div id="notMeDiv" style="display:none; background-color:#0d3b5e; padding:6px 16px; font-size:0.9em;">
+        <input type="checkbox" id="notMeCheck" onchange="notMe()">
+        <label for="notMeCheck" style="color:#aed6f1;">
+            Not <span id="cookieName"></span>? Click here to start as a new user.
+        </label>
+    </div>
+</div>
+<!-- END HEADER -->
+ 
+ 
+<!-- ================= MAIN CONTENT ================= -->
+<div id="main">
+ 
+<h2>New Patient Registration Form</h2>
+<p>All required fields (*) must pass validation before you can submit.</p>
+ 
+<form id="regForm" action="thankyou.html">
+ 
+<!-- ===== BLOCK 1: PERSONAL INFO ===== -->
+<h3>Personal Information</h3>
+<table>
+ 
+<tr>
+    <td class="label">First Name: *</td>
+    <td>
+        <input type="text" name="firstname" id="firstname"
+               maxlength="30" required
+               title="First name: 1-30 characters, letters only"
+               placeholder="First name"
+               oninput="checkFirstName(); saveLocal('firstname')"
+               onblur="checkFirstName(); saveLocal('firstname')">
+        <span class="error" id="err_firstname"></span>
+    </td>
+ 
+    <td class="label">M.I.:</td>
+    <td>
+        <input type="text" name="mi" id="mi"
+               maxlength="1" size="2"
+               title="Middle initial: one letter only, optional"
+               placeholder="MI"
+               oninput="checkMI(); saveLocal('mi')"
+               onblur="checkMI()">
+        <span class="error" id="err_mi"></span>
+    </td>
+ 
+    <td class="label">Last Name: *</td>
+    <td>
+        <input type="text" name="lastname" id="lastname"
+               maxlength="30" required
+               title="Last name: 1-30 characters, letters only"
+               placeholder="Last name"
+               oninput="checkLastName(); saveLocal('lastname')"
+               onblur="checkLastName()">
+        <span class="error" id="err_lastname"></span>
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Date of Birth: *</td>
+    <td>
+        <input type="date" name="dob" id="dob" required
+               title="Date of birth: cannot be in the future or more than 120 years ago"
+               onchange="checkDOB(); saveLocal('dob')"
+               onblur="checkDOB()">
+        <span class="error" id="err_dob"></span>
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Social Security: *</td>
+    <td>
+        <!-- SSN is NOT saved to local storage (sensitive data) -->
+        <input type="password" name="ssn" id="ssn"
+               maxlength="11"
+               placeholder="XXX-XX-XXXX"
+               title="Social Security: 9 digits, dashes added automatically. Not saved locally."
+               oninput="formatSSN()"
+               onblur="checkSSN()">
+        <span class="error" id="err_ssn"></span>
+    </td>
+</tr>
+ 
+</table>
+ 
+<!-- ===== BLOCK 2: CONTACT INFO ===== -->
+<h3>Contact Information</h3>
+<table>
+ 
+<tr>
+    <td class="label">Email: *</td>
+    <td>
+        <input type="email" name="email" id="email"
+               required
+               title="Email: must be in format name@domain.com"
+               placeholder="name@domain.com"
+               oninput="checkEmail(); saveLocal('email')"
+               onblur="checkEmail()">
+        <span class="error" id="err_email"></span>
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Phone Number:</td>
+    <td>
+        <input type="tel" name="phone" id="phone"
+               placeholder="000-000-0000"
+               title="Phone number: format 000-000-0000"
+               oninput="checkPhone(); saveLocal('phone')"
+               onblur="checkPhone()">
+        <span class="error" id="err_phone"></span>
+    </td>
+</tr>
+ 
+</table>
+ 
+<!-- ===== BLOCK 3: ADDRESS ===== -->
+<h3>Address</h3>
+<table>
+ 
+<tr>
+    <td class="label">Address Line 1: *</td>
+    <td>
+        <input type="text" name="address1" id="address1"
+               maxlength="30" required
+               title="Address line 1: required, 2 to 30 characters"
+               placeholder="Street address"
+               oninput="checkAddress1(); saveLocal('address1')"
+               onblur="checkAddress1()">
+        <span class="error" id="err_address1"></span>
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Address Line 2:</td>
+    <td>
+        <input type="text" name="address2" id="address2"
+               maxlength="30"
+               title="Optional, if entered must be 2 to 30 characters"
+               placeholder="Apt, Suite (optional)"
+               oninput="saveLocal('address2')"
+               onblur="checkAddress2()">
+        <span class="error" id="err_address2"></span>
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">City: *</td>
+    <td>
+        <input type="text" name="city" id="city"
+               maxlength="30" required
+               title="City: required, 2 to 30 characters"
+               placeholder="City"
+               oninput="checkCity(); saveLocal('city')"
+               onblur="checkCity()">
+        <span class="error" id="err_city"></span>
+    </td>
+ 
+    <td class="label">State: *</td>
+    <td>
+        <!-- State dropdown is loaded via Fetch API from states.html -->
+        <select name="state" id="state" required
+                title="Please select your state"
+                onchange="checkState(); saveLocal('state')">
+        </select>
+        <span class="error" id="err_state"></span>
+    </td>
+ 
+    <td class="label">Zip: *</td>
+    <td>
+        <input type="text" name="zip" id="zip"
+               maxlength="5" required
+               placeholder="77002"
+               title="Zip code: 5 digits only"
+               oninput="checkZip(); saveLocal('zip')"
+               onblur="checkZip()">
+        <span class="error" id="err_zip"></span>
+    </td>
+</tr>
+ 
+</table>
+ 
+<!-- ===== BLOCK 4: HEALTH INFO ===== -->
+<h3>Health Information</h3>
+<table>
+ 
+<tr>
+    <td class="label">Have you had:</td>
+    <td>
+        <input type="checkbox" name="history" id="chk_chickenpox" value="Chicken Pox"
+               onchange="saveLocalCheck('chk_chickenpox')"> Chicken Pox<br>
+        <input type="checkbox" name="history" id="chk_measles" value="Measles"
+               onchange="saveLocalCheck('chk_measles')"> Measles<br>
+        <input type="checkbox" name="history" id="chk_covid" value="Covid-19"
+               onchange="saveLocalCheck('chk_covid')"> Covid-19<br>
+        <input type="checkbox" name="history" id="chk_smallpox" value="Small Pox"
+               onchange="saveLocalCheck('chk_smallpox')"> Small Pox<br>
+        <input type="checkbox" name="history" id="chk_tetanus" value="Tetanus"
+               onchange="saveLocalCheck('chk_tetanus')"> Tetanus
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Gender:</td>
+    <td>
+        <input type="radio" name="gender" value="Male"
+               onchange="saveLocal('gender')"> Male
+        <input type="radio" name="gender" value="Female"
+               onchange="saveLocal('gender')"> Female
+        <input type="radio" name="gender" value="Other"
+               onchange="saveLocal('gender')"> Other
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Vaccinated?</td>
+    <td>
+        <input type="radio" name="vaccinated" value="Yes"
+               onchange="saveLocal('vaccinated')"> Yes
+        <input type="radio" name="vaccinated" value="No"
+               onchange="saveLocal('vaccinated')"> No
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Do you have insurance?</td>
+    <td>
+        <input type="radio" name="insurance" value="Yes"
+               onchange="saveLocal('insurance')"> Yes
+        <input type="radio" name="insurance" value="No"
+               onchange="saveLocal('insurance')"> No
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Health Rating (1-10):</td>
+    <td>
+        <input type="range" name="health" id="health"
+               min="1" max="10" value="5"
+               title="Rate your health: 1=poor, 10=excellent"
+               oninput="updateSlider(this.value); saveLocal('health')">
+        &nbsp; <span id="healthValue">5</span> out of 10
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Current Symptoms:</td>
+    <td>
+        <textarea name="symptoms" id="symptoms"
+                  rows="3" cols="50"
+                  title="Optional: describe your symptoms"
+                  placeholder="Describe symptoms (optional)"
+                  oninput="saveLocal('symptoms')"></textarea>
+    </td>
+</tr>
+ 
+</table>
+ 
+<!-- ===== BLOCK 5: ACCOUNT SETUP ===== -->
+<h3>Create Account</h3>
+<table>
+ 
+<tr>
+    <td class="label">User ID: *</td>
+    <td>
+        <input type="text" name="userid" id="userid"
+               maxlength="20" required
+               title="5-20 characters, must start with a letter, no spaces"
+               placeholder="Choose a username"
+               oninput="checkUserID(); saveLocal('userid')"
+               onblur="checkUserID()">
+        <span class="error" id="err_userid"></span>
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Password: *</td>
+    <td>
+        <!-- Password NOT saved to local storage (sensitive) -->
+        <input type="password" name="password" id="password"
+               maxlength="30" required
+               title="8-30 characters, must have 1 uppercase, 1 lowercase, 1 number"
+               placeholder="Create a password"
+               oninput="checkPassword()"
+               onblur="checkPassword()">
+        <span class="error" id="err_password"></span>
+    </td>
+</tr>
+ 
+<tr>
+    <td class="label">Re-enter Password: *</td>
+    <td>
+        <input type="password" name="repassword" id="repassword"
+               maxlength="30" required
+               title="Re-enter your password exactly"
+               placeholder="Re-enter password"
+               oninput="checkPasswordMatch()"
+               onblur="checkPasswordMatch()">
+        <span class="error" id="err_repassword"></span>
+    </td>
+</tr>
+ 
+<!-- Remember Me checkbox -->
+<tr>
+    <td class="label">Remember Me:</td>
+    <td>
+        <input type="checkbox" id="rememberMe" name="rememberMe" checked
+               title="Check to save your info for your next visit. Uncheck to clear saved data.">
+        Remember me on this device (saves your info for next time)
+    </td>
+</tr>
+ 
+</table>
+ 
+<br>
+ 
+<!-- ===== BUTTONS ===== -->
+<table>
+<tr>
+    <td>
+        <input type="reset" value="CLEAR AND START OVER" onclick="clearAll()">
+        &nbsp;&nbsp;
+        <input type="button" value="Review" onclick="reviewForm()">
+        &nbsp;&nbsp;
+        <input type="button" value="Validate" onclick="validateAll()">
+        &nbsp;&nbsp;
+        <input type="submit" value="Submit Registration" id="submitBtn" style="display:none;">
+    </td>
+</tr>
+</table>
+ 
+</form>
+ 
+<!-- ================= REVIEW SECTION ================= -->
+<div id="reviewArea" style="display:none;">
+    <h2>Please Review Your Information</h2>
+    <table id="reviewTable">
+        <tr><th>Field</th><th>Your Entry</th><th>Status</th></tr>
+        <tr><td class="label">Full Name</td><td id="rev_name"></td><td id="rev_name_status"></td></tr>
+        <tr><td class="label">Date of Birth</td><td id="rev_dob"></td><td id="rev_dob_status"></td></tr>
+        <tr><td class="label">Email</td><td id="rev_email"></td><td id="rev_email_status"></td></tr>
+        <tr><td class="label">Phone</td><td id="rev_phone"></td><td id="rev_phone_status"></td></tr>
+        <tr><td class="label">Address</td><td id="rev_address"></td><td id="rev_address_status"></td></tr>
+        <tr><td class="label">City/State/Zip</td><td id="rev_citystatezip"></td><td id="rev_csz_status"></td></tr>
+        <tr><td class="label">Medical History</td><td id="rev_history"></td><td></td></tr>
+        <tr><td class="label">Gender</td><td id="rev_gender"></td><td></td></tr>
+        <tr><td class="label">Vaccinated?</td><td id="rev_vaccinated"></td><td></td></tr>
+        <tr><td class="label">Insurance?</td><td id="rev_insurance"></td><td></td></tr>
+        <tr><td class="label">Health Rating</td><td id="rev_health"></td><td></td></tr>
+        <tr><td class="label">Symptoms</td><td id="rev_symptoms"></td><td></td></tr>
+        <tr><td class="label">User ID</td><td id="rev_userid"></td><td id="rev_userid_status"></td></tr>
+        <tr><td class="label">Password</td><td id="rev_password"></td><td id="rev_password_status"></td></tr>
+    </table>
+</div>
+ 
+</div>
+<!-- END MAIN -->
+ 
+ 
+<!-- ================= FOOTER via iFRAME ================= -->
+<!-- Using iFrame to load footer.html as a separate embedded document -->
+<div id="footerWrapper">
+    <iframe src="footer.html"
+            id="footerFrame"
+            title="CarePath Medical Footer"
+            style="width:100%; height:120px; border:none;">
+    </iframe>
+</div>
+<!-- END FOOTER -->
+ 
+ 
+<!-- END OF DOCUMENT: homework4.html -->
+ 
+</body>
+</html>
