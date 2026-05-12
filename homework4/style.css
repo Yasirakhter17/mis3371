@@ -1,0 +1,250 @@
+/*
+Program name: style.css
+Author: Yasir Akhter
+Date created: 05/12/2026
+Date last edited: 05/12/2026
+Version: 1.0
+Description: External stylesheet for CarePath Medical Patient Registration Form.
+             Defines fonts, colors, layout, and all form element styling.
+             Uses tag, class, ID, and name selectors as required.
+*/
+
+/* =====================================================
+   TAG SELECTORS
+   ===================================================== */
+body {
+    /* Custom background color - not default white */
+    background-color: #e8f5f0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #222222;
+    margin: 0;
+    padding: 0;
+}
+
+/* First distinct font family - Georgia serif for headings */
+h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #ffffff;
+    font-size: 1.8em;
+    margin: 0;
+}
+
+/* Second distinct font family continues in h2/h3 */
+h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #1a5276;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #2e7d5e;
+}
+
+/* Body text uses Arial (second distinct family) */
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333333;
+}
+
+table {
+    border-collapse: collapse;
+    width: 95%;
+}
+
+td {
+    padding: 7px 10px;
+    vertical-align: middle;
+}
+
+textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    border: 1px solid #aaaaaa;
+    padding: 5px;
+    background-color: #f9fffc;
+}
+
+select {
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid #aaaaaa;
+    padding: 4px 6px;
+    background-color: #f9fffc;
+}
+
+/* =====================================================
+   ID SELECTORS
+   ===================================================== */
+#header {
+    background-color: #1a5276;
+    color: #ffffff;
+    padding: 14px 24px;
+}
+
+#header span {
+    color: #aed6f1;
+    font-size: 0.9em;
+}
+
+#main {
+    background-color: #ffffff;
+    margin: 22px auto;
+    width: 88%;
+    padding: 22px 30px;
+    border: 1px solid #b2d8c8;
+    border-radius: 4px;
+}
+
+#footer {
+    background-color: #1a5276;
+    color: #aed6f1;
+    padding: 16px 24px;
+    text-align: center;
+    font-size: 0.88em;
+}
+
+#footer p {
+    color: #aed6f1;
+    margin: 6px 0 0 0;
+    font-size: 0.85em;
+}
+
+/* =====================================================
+   CLASS SELECTORS
+   ===================================================== */
+.label {
+    font-weight: bold;
+    color: #1a5276;
+    text-align: right;
+    width: 160px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =====================================================
+   NAME SELECTORS (targeting by name attribute)
+   ===================================================== */
+input[name="mi"] {
+    width: 32px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+input[name="zip"] {
+    width: 90px;
+}
+
+input[name="userid"] {
+    font-family: 'Courier New', Courier, monospace;
+    width: 180px;
+}
+
+input[name="ssn"] {
+    width: 140px;
+    letter-spacing: 1px;
+}
+
+/* =====================================================
+   GENERAL INPUT STYLING
+   ===================================================== */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="date"] {
+    border: 1px solid #aaaaaa;
+    padding: 5px 7px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.94em;
+    background-color: #f9fffc;
+    color: #222222;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #2e7d5e;
+    background-color: #eefaf5;
+}
+
+/* Reset button */
+input[type="reset"] {
+    background-color: #c0392b;
+    color: #ffffff;
+    border: none;
+    padding: 9px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.95em;
+}
+
+input[type="reset"]:hover {
+    background-color: #a93226;
+}
+
+/* Submit button */
+input[type="submit"] {
+    background-color: #1e8449;
+    color: #ffffff;
+    border: none;
+    padding: 9px 24px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.95em;
+}
+
+input[type="submit"]:hover {
+    background-color: #196f3d;
+}
+
+/* =====================================================
+   HYPERLINKS
+   ===================================================== */
+a:link {
+    color: #1a5276;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #6c3483;
+}
+
+a:hover {
+    color: #2e7d5e;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #c0392b;
+}
+
+/* =====================================================
+   FOOTER BUTTON
+   ===================================================== */
+#footer button {
+    background-color: #2e7d5e;
+    color: #ffffff;
+    border: none;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#footer button:hover {
+    background-color: #1e5f45;
+}
+
+#footer a:link,
+#footer a:visited {
+    color: #aed6f1;
+}
+
+/* END OF STYLESHEET: style.css */
