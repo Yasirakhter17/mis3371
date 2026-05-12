@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CarePath Medical - Thank You</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function setup() {
+            var today = new Date();
+            var options = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+            document.getElementById('currentDate').innerHTML = today.toLocaleDateString('en-US', options);
+        }
+    </script>
+<!--
+Program name: thankyou.html
+Author: Yasir Akhter
+Date created: 05/12/2026
+Date last edited: 05/12/2026
+Version: 4.0
+Description: Thank You confirmation page for CarePath Medical homework4
+-->
+</head>
+<body onload="setup()">
+
+<div id="header">
+    <table width="100%">
+        <tr>
+            <td><h1>CarePath Medical</h1></td>
+            <td align="right" style="color:#aed6f1;">
+                Today is: <span id="currentDate"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="main">
+    <h2>Thank You for Your Submission!</h2>
+    <p>Your patient registration has been received successfully.</p>
+    <p>We will be contacting you shortly.</p>
+    <br>
+    <a href="homework4.html">Return to Registration Form</a>
+</div>
+
+<div id="footerWrapper">
+    <iframe src="footer.html"
+            title="CarePath Medical Footer"
+            style="width:100%; height:120px; border:none;">
+    </iframe>
+</div>
+
+<!-- END OF DOCUMENT: thankyou.html -->
+</body>
+</html>
