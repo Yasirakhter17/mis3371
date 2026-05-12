@@ -1,1 +1,86 @@
-
+MIS 3371 - Homework 4 Synopsis
+Author: Yasir Akhter
+Date: 05/12/2026
+Theme: CarePath Medical - Patient Registration Form
+ 
+==============================================
+URL:
+https://Yasirakhter17.github.io/mis3371/homework4/homework4.html
+==============================================
+ 
+==============================================
+WHAT THIS FORM IS SUPPOSED TO DO:
+==============================================
+ 
+This is the CarePath Medical patient registration form for homework 4.
+It builds on homework 3 by adding five new features:
+ 
+1. Fetch API - The state dropdown list is loaded from an external
+   file called states.html using the JavaScript Fetch API.
+   If the fetch fails, a fallback message is shown.
+ 
+2. iFrame - The footer of the page is loaded as a separate
+   HTML file (footer.html) using an iFrame tag so it is an
+   embedded document inside the main page.
+ 
+3. Sticky Header - The header uses position:sticky in CSS so it
+   stays at the top of the screen as the user scrolls down
+   through the form.
+ 
+4. Fixed Footer - The footer wrapper uses position:fixed in CSS
+   so the footer always stays at the bottom of the viewport.
+ 
+5. Cookies - When the user fills out the form, their first name
+   is saved in a cookie that expires after 48 hours. When they
+   return to the page, a welcome back message shows their name
+   and the first name field is pre-filled. A "Not [name]?" 
+   checkbox lets them clear the cookie and start fresh.
+   A "Remember Me" checkbox controls whether the cookie is saved.
+ 
+6. Local Storage - All non-sensitive form fields are saved to
+   local storage as the user types. When a returning user is
+   detected via the cookie, all their previous entries are
+   loaded back into the form automatically. SSN and password
+   fields are NOT saved to local storage for security reasons.
+ 
+==============================================
+WHAT I AM HAPPY WITH THAT IS WORKING:
+==============================================
+ 
+1. The Fetch API successfully loads the states dropdown from
+   the external states.html file on page load.
+ 
+2. The cookie correctly identifies returning users and shows
+   a personalized welcome message in the sticky header.
+ 
+3. The "Not [name]?" checkbox properly expires the cookie and
+   clears all local storage, resetting the form completely.
+ 
+4. Local storage saves each field as the user types and reloads
+   all the data automatically when a returning user is detected.
+ 
+5. The sticky header stays visible as the user scrolls down,
+   and the fixed footer stays at the bottom of the screen at
+   all times.
+ 
+6. The Remember Me checkbox controls whether the cookie and
+   local storage are saved or cleared on validate/reset.
+ 
+7. All homework 3 validation still works on the fly.
+ 
+==============================================
+WHAT I DID NOT YET GET WORKING:
+==============================================
+ 
+1. The state dropdown value from local storage only reloads
+   correctly after the Fetch API finishes loading the options.
+   There is a slight delay and it depends on the fetch completing
+   first before the saved value can be applied.
+ 
+2. The radio button values for gender, vaccinated, and insurance
+   are saved and reloaded but may not always restore correctly
+   if the page is refreshed very quickly.
+ 
+==============================================
+END OF SYNOPSIS
+==============================================
